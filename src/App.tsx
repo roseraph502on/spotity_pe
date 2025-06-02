@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Suspense } from 'react';
 import './App.css';
-import { Route, Routes } from 'react-router'
-import AppLayout from './core/AppLayout'
-import Homepage from './feeture/Homepage'
-import SearchPage from './feeture/SearchPage'
-import SearchWithkeyPage from './feeture/SearchWithkeyPage'
-import PlaylistDetailPage from './feeture/PlaylistDetailPage'
+import { Route, Routes } from 'react-router-dom'
+import Loading from './core/load/Loading';
+import PlaylistPage from './feeture/PlaylistPage';
+const AppLayout = React.lazy(() => import('./core/applayout/AppLayout')) 
+const Homepage = React.lazy(() => import('./feeture/Homepage')) 
+const SearchPage = React.lazy(() => import('./feeture/SearchPage')) 
+const SearchWithkeyPage = React.lazy(() => import('./feeture/SearchWithkeyPage')) 
+const PlaylistDetailPage = React.lazy(() => import('./feeture/PlaylistDetailPage')) 
 
 function App() {
   return (
-    <Routes>
+    <Suspense fallback={<Loading/>}>
+      <Routes>
       <Route path='/' element={<AppLayout />}>
         <Route index element={<Homepage />} />
         <Route path='search' element={<SearchPage />} />
         <Route path='search/:keyword' element={<SearchWithkeyPage />} />
         <Route path='playlist' element={<PlaylistDetailPage />} />
-        {/* <Route path='playlist' element={<PlaylistPage/>}/> */}
+        <Route path='playlist' element={<PlaylistPage/>}/>
       </Route>
       {/* <Route path='/admin' element={<AdminLayout/>}> */}
-
     </Routes>
+    </Suspense>
+    
   );
 }
 

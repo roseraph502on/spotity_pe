@@ -1,12 +1,12 @@
 import React from 'react'
 
-const AppLayout = () => {
+const Loading = () => {
   return (
     <div>
-      AppLayout
+      Loading
     </div>
   )
 }
 
-export default AppLayout
+export default Loading
 

@@ -11,6 +11,10 @@ module.exports = (env, argv) => {
     entry: path.resolve(__dirname, "src", "index.tsx"),
     resolve: {
       extensions: [".tsx", ".ts", ".js"],
+        alias: { 
+          "@/components": path.resolve(__dirname, "src/components"),
+          "@/lib": path.resolve(__dirname, "src/lib"), 
+        }
     },
     module: {
       rules: [
