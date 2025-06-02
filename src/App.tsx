@@ -7,6 +7,8 @@ import Homepage from './feeture/Homepage'
 import SearchPage from './feeture/SearchPage'
 import SearchWithkeyPage from './feeture/SearchWithkeyPage'
 import PlaylistDetailPage from './feeture/PlaylistDetailPage'
+import Loading from './core/Loading';
+import PlaylistPage from './feeture/PlaylistPage';
 
 function App() {
   return (
