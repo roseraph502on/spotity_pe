@@ -2,11 +2,11 @@ import React, { Suspense } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom'
 import Loading from './core/load/Loading';
-import PlaylistPage from './feeture/PlaylistPage';
 const AppLayout = React.lazy(() => import('./core/applayout/AppLayout')) 
 const Homepage = React.lazy(() => import('./feeture/Homepage')) 
 const SearchPage = React.lazy(() => import('./feeture/SearchPage')) 
 const SearchWithkeyPage = React.lazy(() => import('./feeture/SearchWithkeyPage')) 
+const PlaylistPage  = React.lazy(() => import('./feeture/PlaylistPage')) 
 const PlaylistDetailPage = React.lazy(() => import('./feeture/PlaylistDetailPage')) 
 
 function App() {
@@ -20,6 +20,8 @@ function App() {
         <Route path='playlist/:id' element={<PlaylistDetailPage />} />
         <Route path='playlist' element={<PlaylistPage/>}/>
       </Route>
+      <Route path='/load' element={<Loading />}/>
+
       {/* <Route path='/admin' element={<AdminLayout/>}> */}
     </Routes>
     </Suspense>
