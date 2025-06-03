@@ -3,6 +3,7 @@ import { Outlet } from 'react-router'
 import { styled } from '@mui/material'
 import NavBox from './components/NavBox';
 import Library from './components/Library';
+import NavBar from './components/NavBar';
 
 const Layout = styled("div")({
   display: "flex",
@@ -43,6 +44,7 @@ const AppLayout = () => {
 
       </Sidebar>
         <ContentBox  sx={{ padding:"20px"}}>
+          <NavBar/>
            <Outlet />
         </ContentBox>
     </Layout>
