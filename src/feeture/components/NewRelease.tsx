@@ -3,7 +3,7 @@ import useGetNewRelease from '../../hooks/useGetNewRelease'
 import Loading from '../../core/inform/Loading'
 import Error from '../../core/inform/Error'
 import { Grid } from '@mui/material'
-import Card from '../../core/components/card'
+import Card from '../../core/components/MusicCard'
 
 const NewRelease = () => {
   const { data, error, isLoading } = useGetNewRelease()
