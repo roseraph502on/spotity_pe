@@ -1,31 +1,31 @@
 import React, { Suspense } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom'
-import Loading from './core/load/Loading';
-const AppLayout = React.lazy(() => import('./core/applayout/AppLayout')) 
-const Homepage = React.lazy(() => import('./feeture/Homepage')) 
-const SearchPage = React.lazy(() => import('./feeture/SearchPage')) 
-const SearchWithkeyPage = React.lazy(() => import('./feeture/SearchWithkeyPage')) 
-const PlaylistPage  = React.lazy(() => import('./feeture/PlaylistPage')) 
-const PlaylistDetailPage = React.lazy(() => import('./feeture/PlaylistDetailPage')) 
+import Loading from './core/inform/Loading';
+const AppLayout = React.lazy(() => import('./core/applayout/AppLayout'))
+const Homepage = React.lazy(() => import('./feeture/Homepage'))
+const SearchPage = React.lazy(() => import('./feeture/SearchPage'))
+const SearchWithkeyPage = React.lazy(() => import('./feeture/SearchWithkeyPage'))
+const PlaylistPage = React.lazy(() => import('./feeture/PlaylistPage'))
+const PlaylistDetailPage = React.lazy(() => import('./feeture/PlaylistDetailPage'))
 
 function App() {
   return (
-    <Suspense fallback={<Loading/>}>
+    <Suspense fallback={<Loading />}>
       <Routes>
-      <Route path='/' element={<AppLayout />}>
-        <Route index element={<Homepage />} />
-        <Route path='search' element={<SearchPage />} />
-        <Route path='search/:keyword' element={<SearchWithkeyPage />} />
-        <Route path='playlist/:id' element={<PlaylistDetailPage />} />
-        <Route path='playlist' element={<PlaylistPage/>}/>
-      </Route>
-      <Route path='/load' element={<Loading />}/>
+        <Route path='/' element={<AppLayout />}>
+          <Route index element={<Homepage />} />
+          <Route path='search' element={<SearchPage />} />
+          <Route path='search/:keyword' element={<SearchWithkeyPage />} />
+          <Route path='playlist/:id' element={<PlaylistDetailPage />} />
+          <Route path='playlist' element={<PlaylistPage />} />
+        </Route>
+        <Route path='/load' element={<Loading />} />
 
-      {/* <Route path='/admin' element={<AdminLayout/>}> */}
-    </Routes>
+        {/* <Route path='/admin' element={<AdminLayout/>}> */}
+      </Routes>
     </Suspense>
-    
+
   );
 }
 

@@ -3,7 +3,11 @@ import { ClientCredentialTokenResponse } from "../models/auth"
 import { clientId, clientSelect } from "../config/authConfig"
 
 const encodedBase64=(data:string):string=>{
-  return Buffer.from(data).toString('base64')
+  if(typeof window !== "undefined"){
+    return btoa(data); //브라우저 환경경
+  } else{
+    return Buffer.from(data).toString('base64') // node.js
+  }
 }
 
 export const getClientCredentialToken = async():Promise<ClientCredentialTokenResponse>=>{
@@ -15,7 +19,7 @@ export const getClientCredentialToken = async():Promise<ClientCredentialTokenRes
       {
         headers:{
           Authorization: `Basic ${encodedBase64(clientId + ':' + clientSelect)}`,
-          "Content-Type":"application/x-www-form-urlencoded.",
+          "Content-Type":"application/x-www-form-urlencoded",
         },
       }
     );
