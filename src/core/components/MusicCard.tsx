@@ -15,6 +15,10 @@ const CardContainer = styled("div")(({ theme }) => ({
   "&:hover .overlay": {
     opacity: 1,
   },
+  '@media (max-width: 396px)': {
+    padding: "6px",
+    minWidth: "120px",
+  },
 }));
 const AlbumImage = styled("img")({
   width: "100%",

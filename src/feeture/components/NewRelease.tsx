@@ -12,7 +12,7 @@ const NewRelease = () => {
   if (error) { return <Error errorMessage={error.message}/> }
   return (
     <div>
-      <h1>New Released Albums</h1>
+      <h2>New Released Albums</h2>
       <div>
       {data && data.albums.items.length>0?(
         <Grid container spacing={2}>{data.albums.items.map((album)=>(
