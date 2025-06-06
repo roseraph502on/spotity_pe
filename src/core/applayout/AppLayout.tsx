@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router'
-import { styled } from '@mui/material'
+import { Box, styled } from '@mui/material'
 import NavBox from './components/NavBox';
 import Library from './components/Library';
 import NavBar from './components/NavBar';
@@ -31,6 +31,7 @@ const ContentBox = styled('div')(({ theme }) => ({
 const AppLayout = () => {
   return (
     <Layout>
+      {/* 왼쪽 Sidebar 영역 */}
       <Sidebar>
         {/* 1 */}
         <ContentBox>
@@ -40,12 +41,13 @@ const AppLayout = () => {
         <ContentBox sx={{ flexGrow: 1 }}>
           <Library />
         </ContentBox>
-        {/* 3 */}
-
       </Sidebar>
-        <ContentBox  sx={{ padding:"20px"}}>
+      {/* 3  : Sidebar 옆의 메인 콘텐츠 영역 */}
+        <ContentBox  sx={{ padding:"20px", display: 'flex',flexDirection: 'column',}}>
           <NavBar/>
+          <Box sx={{ flexGrow: 1,overflowY: 'auto'}}>
            <Outlet />
+          </Box>
         </ContentBox>
     </Layout>
   )

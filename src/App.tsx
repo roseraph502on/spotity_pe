@@ -1,7 +1,8 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom'
 import Loading from './core/inform/Loading';
+import useExchangeToken from './hooks/useExchangeToken';
 const AppLayout = React.lazy(() => import('./core/applayout/AppLayout'))
 const Homepage = React.lazy(() => import('./feeture/Homepage'))
 const SearchPage = React.lazy(() => import('./feeture/SearchPage'))
@@ -10,6 +11,17 @@ const PlaylistPage = React.lazy(() => import('./feeture/PlaylistPage'))
 const PlaylistDetailPage = React.lazy(() => import('./feeture/PlaylistDetailPage'))
 
 function App() {
+  const urlParams = new URLSearchParams(window.location.search);
+  let code = urlParams.get('code');
+  const codeVerifier = localStorage.getItem('code_verifier');
+  const { mutate: exchangeToken } = useExchangeToken()
+
+  useEffect(() => {
+    if (code && codeVerifier) {
+      exchangeToken({ code, codeVerifier });
+    }
+  }, [code, codeVerifier, exchangeToken]);
+
   return (
     <Suspense fallback={<Loading />}>
       <Routes>
