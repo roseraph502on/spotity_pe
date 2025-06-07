@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ClientCredentialTokenResponse } from "../models/auth"
+import { ClientCredentialTokenResponse, ExchangeTokenResponse } from "../models/auth"
 import { CLIENT_SECRET, CLIENT_ID } from "../config/authConfig"
 import { REDIRECT_URI } from "../config/commonConfig";
 
