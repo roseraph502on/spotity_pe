@@ -43,7 +43,7 @@ const AppLayout = () => {
         </ContentBox>
       </Sidebar>
       {/* 3  : Sidebar 옆의 메인 콘텐츠 영역 */}
-        <ContentBox  sx={{ padding:"20px", display: 'flex',flexDirection: 'column',}}>
+        <ContentBox  sx={{ padding:"0 20px", display: 'flex',flexDirection: 'column',}}>
           <NavBar/>
           <Box sx={{ flexGrow: 1,overflowY: 'auto'}}>
            <Outlet />
