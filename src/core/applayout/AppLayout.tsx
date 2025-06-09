@@ -38,7 +38,7 @@ const AppLayout = () => {
           <NavBox/>
         </ContentBox>
         {/* 2 */}
-        <ContentBox sx={{ flexGrow: 1 }}>
+        <ContentBox sx={{ flexGrow: 1}}>
           <Library />
         </ContentBox>
       </Sidebar>
