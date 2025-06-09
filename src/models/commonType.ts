@@ -26,6 +26,6 @@ export interface Owner {
     external_urls: ExternalUrls;
     href: string;
     id: string;
-    type: "user";
+    type: string;
     uri: string;
 }
