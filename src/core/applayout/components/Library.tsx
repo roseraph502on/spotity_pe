@@ -57,7 +57,7 @@ const Library = () => {
         <AddIcon />
       </Head>
       <Box sx={{
-        height:"400px",
+        height:"100px",
           flexGrow: 1,
           overflowY: 'auto',
           '&::-webkit-scrollbar': {
