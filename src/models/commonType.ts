@@ -29,3 +29,8 @@ export interface Owner {
     type: string;
     uri: string;
 }
+export interface ExternalIds {
+    isrc?:string;
+    ean?:string;
+    upc?:string;
+}
