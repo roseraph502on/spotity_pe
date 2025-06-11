@@ -23,6 +23,7 @@ const useGetCurrentUserPlaylists = (
                 return nextOffset ? parseInt(nextOffset, 10) : undefined;
             } return undefined;
         },
+        enabled: enabled
     });
 };
 
