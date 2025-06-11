@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SPOTIFY_BASE_URL } from "../config/commonConfig";
+import { request } from "http";
 
 const api = axios.create({
     baseURL: SPOTIFY_BASE_URL,
@@ -20,5 +21,12 @@ api.interceptors.request.use((config) => {
     }
     return config;
 });
+//api 호출전에 세팅해서 Bearer 업데이트
+api.interceptors.request.use((request)=>{
+    request.headers.Authorization = `Bearer ${localStorage.getItem(
+        "access_token"
+    )}`;
+    return request;
+})
 
 export default api;
