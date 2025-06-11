@@ -22,7 +22,6 @@ const refreshToken = async (): Promise<string | null> => {
   console.log("유효하지 않은 토큰 발견. 토큰 삭제 시도...");
   localStorage.removeItem("access_token");
   console.log("토큰 삭제 완료. 재인증 필요.");
-  window.location.reload();
   return null;
 };
 
