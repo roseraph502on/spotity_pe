@@ -27,21 +27,34 @@ api.interceptors.request.use((request) => {
 });
 
 const refreshToken = async (): Promise<string | null> => {
-  try {
-    console.log("토큰 갱신 시도...");
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    const newAccessToken = "새로_발급받은_access_token_" + Date.now();
-    localStorage.setItem("access_token", newAccessToken);
-    console.log("토큰 갱신 완료:", newAccessToken);
-    return newAccessToken;
-
-  } catch (error) {
-    console.error("토큰 갱신 실패:", error);
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    return null;
-  }
+  console.log("유효하지 않은 토큰 발견. 토큰 삭제 시도...");
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("refresh_token");
+  console.log("토큰 삭제 완료. 재인증 필요.");
+  return null;
 };
+
+
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("access_token");
+
+    if (token) {
+      config.headers = config.headers ?? {};
+      config.headers.Authorization = `Bearer ${token}`;
+    } else {
+      if (config.headers) {
+        delete config.headers.Authorization;
+      }
+    }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 api.interceptors.response.use(
   (response) => {
     return response;
@@ -50,33 +63,15 @@ api.interceptors.response.use(
     const originalRequest = error.config;
     const status = error.response?.status;
 
-    if (status === 401 && !originalRequest._retry && !isRefreshing) {
-      isRefreshing = true;
+    if (status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      try {
-        const newAccessToken = await refreshToken();
+      const newAccessToken = await refreshToken();
 
-        if (newAccessToken) {
-          api.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
-          originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+      failedQueue.forEach(promise => promise.reject(new Error("토큰 삭제됨. 재인증 필요.")));
+      failedQueue = [];
 
-          failedQueue.forEach(promise => promise.resolve(api(promise.config)));
-          failedQueue = [];
-
-          return api(originalRequest);
-        } else {
-          failedQueue.forEach(promise => promise.reject(new Error("토큰 갱신 실패")));
-          failedQueue = [];
-          return Promise.reject(error);
-        }
-      } catch (refreshError) {
-        failedQueue.forEach(promise => promise.reject(refreshError));
-        failedQueue = [];
-        return Promise.reject(refreshError);
-      } finally {
-        isRefreshing = false;
-      }
+      return Promise.reject(error);
     }
 
     if (status === 401 && isRefreshing) {
