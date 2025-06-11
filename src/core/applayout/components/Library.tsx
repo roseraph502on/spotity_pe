@@ -33,7 +33,7 @@ const Library = () => {
       fetchNextPage();
     }
   },[inView])
-  console.log("playlist", playlist)
+  // console.log("playlist", playlist)
   // 유저 정보 로딩 중 또는 에러 발생 시 처리
   if(isUserLoading) return <>loading ...</>;
   if(userError) return <Error errorMessage={userError.message} />;

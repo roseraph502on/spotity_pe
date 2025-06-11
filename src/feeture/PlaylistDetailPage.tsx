@@ -36,10 +36,10 @@ const PlaylistDetailPage = () => {
  
   if (id === undefined) return <Navigate to="/" />
   const { data: detail, error, isLoading } = useGetPlaylist({ playlist_id: id });
-  console.log("detail", detail)
+  // console.log("detail", detail)
   const { data: items, error:itemsError, isLoading:itemsIsLoading, hasNextPage, isFetchingNextPage, fetchNextPage}
   = useGetPlaylistItem({playlist_id:id, limit:10})
-  console.log("items", items)
+  // console.log("items", items)
 
   //무한 스크롤
   const [ref, inView] = useInView();
