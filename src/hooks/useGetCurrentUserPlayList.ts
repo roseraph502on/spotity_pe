@@ -1,6 +1,7 @@
 import { InfiniteData, useInfiniteQuery, UseInfiniteQueryResult, useQuery } from "@tanstack/react-query";
 import { getCurrentUserPlaylists } from "../apis/playList";
 import { GetCurrentUserPlaylistRequest, GetCurrentUserPlaylistsResponse } from "../models/playlist";
+import axios from "axios";
 
 const useGetCurrentUserPlaylists = (
     {limit, offset}: GetCurrentUserPlaylistRequest)
@@ -22,8 +23,16 @@ const useGetCurrentUserPlaylists = (
                 const nextOffset = url.searchParams.get("offset");
                 return nextOffset ? parseInt(nextOffset, 10) : undefined;
             } return undefined;
+            
         },
-        enabled: enabled
+        enabled: enabled,
+        retry: (failureCount, error) => {
+      // error가 AxiosError 타입이고 상태 코드가 401이면 재시도하지 않음
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        return false;
+      }
+      return failureCount < 3;
+    },
     });
 };
 
