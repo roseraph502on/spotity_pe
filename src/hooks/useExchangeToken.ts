@@ -2,8 +2,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { exchangeToken } from "../apis/aythApi"
 import { ExchangeTokenResponse } from "../models/auth";
 
-const queryClient = useQueryClient();
 const useExchangeToken = () => {
+    const queryClient = useQueryClient();
     return useMutation<
         ExchangeTokenResponse,
         Error,
