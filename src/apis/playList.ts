@@ -30,6 +30,6 @@ export const getPlaylistItems =
         const response = await api.get(`/playlists/${params.playlist_id}/tracks`,{params});
         return response.data;
     }catch(error){
-        throw new Error("fail to fetch Playlist item")
+        throw error;
     }
 }

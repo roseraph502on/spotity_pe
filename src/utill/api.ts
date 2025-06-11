@@ -13,23 +13,10 @@ const api = axios.create({
     },
 });
 
-api.interceptors.request.use((request) => {
-    request.headers.Authorization = `Bearer ${localStorage.getItem("access_token")}`;
-    return request;
-});
-
-const refreshToken = async (): Promise<string | null> => {
-  console.log("유효하지 않은 토큰 발견. 토큰 삭제 시도...");
-  localStorage.removeItem("access_token");
-  console.log("토큰 삭제 완료. 재인증 필요.");
-  return null;
-};
-
 
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("access_token");
-
     if (token) {
       config.headers = config.headers ?? {};
       config.headers.Authorization = `Bearer ${token}`;
@@ -42,35 +29,6 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
-    return Promise.reject(error);
-  }
-);
-
-api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async (error) => {
-    const originalRequest = error.config;
-    const status = error.response?.status;
-
-    if (status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-
-      const newAccessToken = await refreshToken();
-
-      failedQueue.forEach(promise => promise.reject(new Error("토큰 삭제됨. 재인증 필요.")));
-      failedQueue = [];
-
-      return Promise.reject(error);
-    }
-
-    if (status === 401 && isRefreshing) {
-      return new Promise((resolve, reject) => {
-        failedQueue.push({ resolve, reject, config: originalRequest });
-      });
-    }
-
     return Promise.reject(error);
   }
 );
