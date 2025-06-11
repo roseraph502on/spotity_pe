@@ -35,7 +35,7 @@ const Library = () => {
   },[inView])
   console.log("playlist", playlist)
   // 유저 정보 로딩 중 또는 에러 발생 시 처리
-  if(isUserLoading) return <Loading />;
+  if(isUserLoading) return <>loading ...</>;
   if(userError) return <Error errorMessage={userError.message} />;
   // 유저 정보는 로드되었지만 데이터가 없는 경우 (예: 로그인 안 함) 처리
   if (!user) return <EmptyPlaylist />;

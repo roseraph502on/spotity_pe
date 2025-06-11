@@ -14,23 +14,15 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((request) => {
-    const token = localStorage.getItem("access_token");
-    if (token) {
-        request.headers = request.headers ?? {};
-        request.headers.Authorization = `Bearer ${token}`;
-    } else {
-        if (request.headers) {
-            delete request.headers.Authorization;
-        }
-    }
+    request.headers.Authorization = `Bearer ${localStorage.getItem("access_token")}`;
     return request;
 });
 
 const refreshToken = async (): Promise<string | null> => {
   console.log("유효하지 않은 토큰 발견. 토큰 삭제 시도...");
   localStorage.removeItem("access_token");
-  localStorage.removeItem("refresh_token");
   console.log("토큰 삭제 완료. 재인증 필요.");
+  window.location.reload();
   return null;
 };
 

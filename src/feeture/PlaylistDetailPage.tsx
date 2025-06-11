@@ -5,6 +5,7 @@ import { Avatar, Box, Grid, styled, Typography } from '@mui/material';
 import Loading from '../core/inform/Loading';
 import Error from '../core/inform/Error';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import useGetPlaylistItem from '../hooks/useGetPlayListsItem';
 
 const Img = styled('img')({
   width: "100%",
@@ -25,14 +26,18 @@ const PliTnform = styled(Grid) ({
   borderRadius:"20px",
 
 })
+
 const PlaylistDetailPage = () => {
+
   const { id } = useParams<{ id: string }>();
   if (id === undefined) return <Navigate to="/" />
   const { data: detail, error, isLoading } = useGetPlaylist({ playlist_id: id });
   console.log("detail", detail)
-  if (isLoading) return <Loading />;
-  if (error) return <Error errorMessage={error.message} />;
- 
+  const { data: items, error:itemsError, isLoading:itemsIsLoading, hasNextPage, isFetchingNextPage, fetchNextPage}
+  = useGetPlaylistItem({playlist_id:id, limit:10})
+  console.log("items", items)
+  if (isLoading && itemsIsLoading) return <Loading />;
+  if (error && itemsError) return <Error errorMessage={error.message} />;
  
   return (
     <div>
