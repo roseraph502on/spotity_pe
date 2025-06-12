@@ -1,5 +1,6 @@
 import { SPOTIFY_BASE_URL } from "../config/commonConfig";
 import axios, { AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { getSpotifyAuthUrl } from "./auth";
 
 
 const api = axios.create({
@@ -53,7 +54,7 @@ api.interceptors.response.use(
       localStorage.removeItem("refresh_token");
 
       alert("세션이 만료되었습니다. 다시 로그인해주세요.");
-      window.location.href = '/';
+      getSpotifyAuthUrl()
       return Promise.reject(error);
     }
 
