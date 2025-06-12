@@ -16,7 +16,7 @@ const useGetCurrentUserPlaylists = (
         queryFn: async ({ pageParam = 0 }) => {
             return getCurrentUserPlaylists( {limit, offset: pageParam} ); 
         },
-        initialPageParam: 10, 
+        initialPageParam: 0, 
         getNextPageParam:(lastPage) =>{
             if(lastPage.next){
                 const url = new URL(lastPage.next);
