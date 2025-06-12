@@ -9,6 +9,8 @@ import useGetCrruentUserProfile from '../../../hooks/useGetCurrentUserProfile';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 import Playlist from './Playlist';
+import { Button } from '@mui/material';
+import useCreatePlaylist from '../../../hooks/useCreatePlaylist';
 
 const Head = styled('ul')(({ theme }) => ({
   display: 'flex',
@@ -16,10 +18,15 @@ const Head = styled('ul')(({ theme }) => ({
   alignItems: 'center',
   padding: theme.spacing(1),
 }));
+const HeadBTN = styled(Button)(({ theme }) => ({
+  minWidth:'25px',
+  padding: '2px'
+}));
 const LibraryText = styled('h3')(({ theme }) => ({
   margin: 'auto',
 
 }));
+
 
 const Library = () => {
   //유저 정보
@@ -33,6 +40,7 @@ const Library = () => {
       fetchNextPage();
     }
   },[inView])
+  const {mutate:createList}= useCreatePlaylist()
   // console.log("playlist", playlist)
   // 유저 정보 로딩 중 또는 에러 발생 시 처리
   if(isUserLoading) return <>loading ...</>;
@@ -43,6 +51,10 @@ const Library = () => {
   // 플레이리스트 로딩 중 또는 에러 발생 시 처리 (유저 정보 로드 후에만 이 로직 실행)
   if (isLoading) return <Loading />;
   if (error) return <Error errorMessage={error.message} />;
+
+  const createListClk = ()=>{
+    createList({name:"my playist"})
+  }
   return (
     <Box
     sx={{
@@ -52,9 +64,13 @@ const Library = () => {
       }}
     >
       <Head>
+        <HeadBTN>
         <BookmarkIcon />
+        </HeadBTN>       
         <LibraryText>Your Library</LibraryText>
-        <AddIcon />
+        <HeadBTN onClick={createListClk}>
+                  <AddIcon />
+        </HeadBTN>
       </Head>
       <Box sx={{
         height:"100px",

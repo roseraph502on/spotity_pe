@@ -75,3 +75,9 @@ export interface GetPlaylistItemsRequest extends GetPlaylistRequest{
     offset?:number,
     limit?:number
 }
+export interface CreatePlaylistRequest{
+    name:string;
+    playlistPublic?:boolean;
+    collaborative?:boolean;
+    description?:string;
+}

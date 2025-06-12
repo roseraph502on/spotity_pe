@@ -15,6 +15,7 @@ const useExchangeToken = () => {
             queryClient.invalidateQueries({
                 queryKey:['current-user-profie']
             })
+            console.log("토큰 교환 성공");
         },
         onError: (err) => {
             console.error("토큰 교환 실패:", err);
