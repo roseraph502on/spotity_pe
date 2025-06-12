@@ -9,6 +9,7 @@ import useGetPlaylistItem from '../hooks/useGetPlayListsItem';
 import DesktopPlayListItem from './components/DesktopPlayListItem';
 import { useInView } from 'react-intersection-observer';
 import LoadingSpinner from '../core/inform/LoadingSpinner';
+import EmptyPlaylistWSearch from './components/EmptyPlaylistWSearch';
 
 const Img = styled('img')({
   width: "100%",
@@ -76,7 +77,7 @@ const PlaylistDetailPage = () => {
           </Box>
         </Grid>
       </PliTnform>
-      {detail?.tracks?.total === 0 ?  <></> 
+      {detail?.tracks?.total === 0 ?  <EmptyPlaylistWSearch /> 
       : <Table>
          <TableHead>
           <TableRow>
