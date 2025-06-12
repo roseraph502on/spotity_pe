@@ -22,7 +22,7 @@ const NavBar = () => {
   const handleLogoutClose = () => {
     setAnchorEl(null)
     localStorage.removeItem("access_token");
-    window.location.reload;
+    window.location.reload();
   };
   return (
       <Box display="flex" justifyContent="flex-end" alignItems="center" height="64px">
