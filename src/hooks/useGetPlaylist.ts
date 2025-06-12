@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { GetPlaylistRequest } from "../models/playlist"
-import { getPlaylist } from "../apis/playList";
+import { getPlaylist } from "../apis/playListApi";
 
 const useGetPlaylist= (params:GetPlaylistRequest)=>{
   return useQuery({

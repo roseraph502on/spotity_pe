@@ -2,6 +2,31 @@ import { SimpleifiedAlbumObject } from "./album";
 import { Artist } from "./artist";
 import { ExternalIds, ExternalUrls, Image } from "./commonType";
 
+export type SimplifiedEpisode = Omit<Episode,"show">;
+export interface SimplifiedAudioBook {
+    author:{ name: string }[];
+    available_markets: string[];
+    copyrights: CopyrightObject;
+    description: string;
+    html_description: string;
+    edition?: string;
+    explicit:boolean;
+    externaml_urld: ExternalUrls;
+    href:string;
+    id: string;
+    images: Image[]
+    languages: string[];
+    media_type: string;
+    name: string;
+    narrators:{
+        name: string;
+    }[];
+    publisher: string;
+    type:"audiobook";
+    uri: string;
+    total_cahpters:number;
+}
+
 export interface Track {
     album?:SimpleifiedAlbumObject;
     artists?:Artist[];
@@ -89,3 +114,4 @@ export interface CopyrightObject {
     text?:string;
     type?:string;
 }
+

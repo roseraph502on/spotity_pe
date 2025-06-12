@@ -1,5 +1,5 @@
 import { InfiniteData, useInfiniteQuery, UseInfiniteQueryResult, useQuery } from "@tanstack/react-query";
-import { getCurrentUserPlaylists } from "../apis/playList";
+import { getCurrentUserPlaylists } from "../apis/playListApi";
 import { GetCurrentUserPlaylistRequest, GetCurrentUserPlaylistsResponse } from "../models/playlist";
 import axios from "axios";
 

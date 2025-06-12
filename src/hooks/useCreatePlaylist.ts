@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useGetCrruentUserProfile from "./useGetCurrentUserProfile"
 import { CreatePlaylistRequest } from "../models/playlist";
-import { CreatePlaylist } from "../apis/playList";
+import { CreatePlaylist } from "../apis/playListApi";
 
 const useCreatePlaylist = () => {
   const queruClient = useQueryClient() 
