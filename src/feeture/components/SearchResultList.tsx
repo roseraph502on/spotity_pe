@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Track } from '../../models/Track'
 import {
   Box,
@@ -8,6 +8,8 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { useInView } from 'react-intersection-observer';
+import LoadingSpinner from '../../core/inform/LoadingSpinner';
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   width: "100%",
@@ -25,8 +27,21 @@ const AlbumImage = styled("img")({
 
 interface SearchResultListProps{
   list:Track[];
+  hasNextPage: boolean;
+  isFetchingNextPage: boolean;
+  fetchNextPage: () => void;
 }
-const SearchResultList = ({list}:SearchResultListProps) => {
+// // // // // // // // // 
+const SearchResultList = 
+({list, hasNextPage, isFetchingNextPage, fetchNextPage,}
+: SearchResultListProps ) => {
+  // 무한스크롤
+  const [ref, inView] = useInView();  
+   useEffect(() => { 
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage]);
   return (
     <div>
        {list.map((track) => (
@@ -50,6 +65,9 @@ const SearchResultList = ({list}:SearchResultListProps) => {
           </TableCell>
         </StyledTableRow>
       ))}
+       <div ref={ref} style={{ height: 1 }}> 
+          {isFetchingNextPage && <LoadingSpinner />}
+        </div>
           </div>
 
   )

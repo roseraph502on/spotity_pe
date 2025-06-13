@@ -8,7 +8,6 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import useGetPlaylistItem from '../hooks/useGetPlayListsItem';
 import DesktopPlayListItem from './components/DesktopPlayListItem';
 import { useInView } from 'react-intersection-observer';
-import LoadingSpinner from '../core/inform/LoadingSpinner';
 import EmptyPlaylistWSearch from './components/EmptyPlaylistWSearch';
 
 const Img = styled('img')({
@@ -103,7 +102,7 @@ const PlaylistDetailPage = () => {
           }
           <TableRow sx={{ height: "5px" }} ref={ref} />
           <TableCell colSpan={5} sx={{ textAlign: 'center' }}>
-            {isFetchingNextPage && <LoadingSpinner />}
+            {isFetchingNextPage && <Loading />}
           </TableCell>
          </TableBody>
       </Table> }
