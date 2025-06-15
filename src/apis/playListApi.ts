@@ -1,5 +1,5 @@
 import { AsyncLocalStorage } from "async_hooks";
-import { CreatePlaylistRequest, GetCurrentUserPlaylistRequest, GetCurrentUserPlaylistsResponse, GetPlaylistItemResponse, GetPlaylistItemsRequest, GetPlaylistRequest, Playlist } from "../models/playlist";
+import { AddPlaylistRequest, AddPlaylistResponse, CreatePlaylistRequest, GetCurrentUserPlaylistRequest, GetCurrentUserPlaylistsResponse, GetPlaylistItemResponse, GetPlaylistItemsRequest, GetPlaylistRequest, Playlist } from "../models/playlist";
 import api from "../utill/api";
 
 export const getCurrentUserPlaylists = async ({ limit, offset }
@@ -47,6 +47,18 @@ async(user_id:string, params: CreatePlaylistRequest)
         });
         return response.data;
     }catch(error){
+        throw error;
+    }
+}
+export const AddPlaylist = 
+async( playlist_id: string, items: AddPlaylistRequest)
+: Promise<AddPlaylistResponse> => {
+try {
+        const response = await api.post(`/playlists/${playlist_id}/tracks`, items);
+        return response.data;
+
+    }catch (error) {
+        console.error(`플레이리스트 ${playlist_id}에 항목 추가 실패:`, error);
         throw error;
     }
 }

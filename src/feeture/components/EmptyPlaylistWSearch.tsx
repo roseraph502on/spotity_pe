@@ -15,7 +15,7 @@ const EmptyPlaylistWSearch = () => {
     q:keyword,
     type:[SEARCH_TYPE.Track],
   })
-  console.log("keyword search",data)
+  // console.log("keyword search",data)
   const tracks = data?.pages.flatMap((page) => page.tracks?.items).filter((item): item is Track => item !== undefined) ?? [];
   const hasResults = tracks.length > 0;
   const handleSearchKeyword = (event:React.ChangeEvent<HTMLInputElement>)=>{

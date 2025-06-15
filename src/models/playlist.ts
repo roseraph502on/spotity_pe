@@ -81,3 +81,10 @@ export interface CreatePlaylistRequest{
     collaborative?:boolean;
     description?:string;
 }
+export interface AddPlaylistRequest{
+    uris: string[];
+    position?:number
+}
+export interface AddPlaylistResponse {
+    snapshot_id: string; // 변경된 플레이리스트의 스냅샷 ID
+}

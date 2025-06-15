@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router'
 
 const NavBar = () => {
   const {data:userProfile}=useGetCrruentUserProfile()
-  console.log("userProfile",userProfile);
+  // console.log("userProfile",userProfile);
 
 
   const navigate = useNavigate();
