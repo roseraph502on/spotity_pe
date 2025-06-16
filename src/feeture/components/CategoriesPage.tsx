@@ -1,21 +1,30 @@
 import { Box, Grid, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import useGetCategories from '../../hooks/useGetCategories';
 import Loading from '../../core/inform/Loading';
 import Error from '../../core/inform/Error';
 import styled from 'styled-components';
 const predefinedColors: string[] = [
-  '#1ED760', '#D7A31E', '#D7431E',
-  '#1E6ED7', '#D71E68', '#991ED7',
-  '#2DD71E', '#C8D71E', '#1E40D7',
+  '#561ED7', '#D7431E', '#D71E68',
+  '#D7C41E', '#901ED7', '#1E40D7',
+  '#1ED760',
 ];
+const RecordPlayerArm = styled('img')({
+  position: 'absolute',
+  top:0,
+  right:0,
+  zIndex: 1,
+  width:"40%",
+
+})
 const ImgIcon = styled('img')({
-  width: "90%",
-  borderRadius: "5px",
+  width: "80%",
+  borderRadius: "300px",
+  boxShadow:"2px 2px 2px rgba(0, 0, 0, 0.39)"
 })
 const StyledBox = styled(Grid)(({ theme }) => ({
   width: "100%",
-  borderRadius: "10px",
+  borderRadius: "5px",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -23,13 +32,20 @@ const StyledBox = styled(Grid)(({ theme }) => ({
   color: "white",
   aspectRatio: '1 / 0.6',
   fontSize: "16px",
+  position: 'relative',
 }));
 const CategoriesPage = () => {
-
+  //랜덤 컬러
+  const [startIndex, setStartIndex] = useState<number | null>(null); 
+  useEffect(() => {
+    const randomInitialIndex = Math.floor(Math.random() * predefinedColors.length);
+    setStartIndex(randomInitialIndex);
+  }, []);
+  //카테고리 api
   const { data, isLoading, isError, error }
     = useGetCategories({ limit: 50, country: 'KR', locale: 'ko_KR' });
 
-  if (isLoading) return <Loading />
+  if (startIndex === null || isLoading) return <Loading />
   if (isError) return <Error errorMessage={error.message} />
   const categories = data?.categories?.items;
   console.log("useGetCategories", data)
@@ -37,18 +53,25 @@ const CategoriesPage = () => {
     <Grid container spacing={2} padding={"1%"}>
 
       {categories?.map((category, index) => {
-        const backgroundColor = predefinedColors[index % predefinedColors.length];
-
+          const colorIndex = (startIndex + index) % predefinedColors.length;
+          const backgroundColor = predefinedColors[colorIndex];
         return (
           <Grid size={{ xs: 6, md: 4 }} key={category.id} >
             <StyledBox container sx={{ backgroundColor: backgroundColor }}>
-              <Grid size={7} sx={{ display: "flex", justifyContent: "center", alignItems: "center", }}>
+              <RecordPlayerArm src="https://static.thenounproject.com/png/1584695-200.png" alt="" />
+              <Grid size={8} sx={{ display: "flex", justifyContent: "center", alignItems: "center", }}>
                 {category.icons && category.icons.length > 0 && (
                   <ImgIcon src={category.icons[0].url} alt={category.name} />
                 )}
               </Grid>
-              <Grid size={5} sx={{ paddingBottom: "5%", alignSelf: 'flex-end'}}>
-                <Typography fontWeight={"700"}  fontSize={"16px"}>{category.name}</Typography>
+              <Grid size={4} sx={{ paddingBottom: "5%", alignSelf: 'flex-end'}}>
+                <Typography 
+                fontSize={{ xs:"9px", sm:"12px",md:"14px",lg:"17px"}}
+                sx={{width:"100%",fontWeight:"700",textShadow:"2px 2px 2px rgba(0, 0, 0, 0.39)"}} 
+                 >
+                  
+                  {category.name}
+                </Typography>
 
               </Grid>
             </StyledBox>

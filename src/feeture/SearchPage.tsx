@@ -20,7 +20,7 @@ const SearchPage = () => {
                   ),
                 },
               }}
-              sx={{width:"100%"}}
+              sx={{width:"100%",marginTop:"10px"}}
             />
             <CategoriesPage />
     </div>
