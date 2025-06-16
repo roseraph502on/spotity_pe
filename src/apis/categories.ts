@@ -1,12 +1,17 @@
+import axios from 'axios';
 import { GetCategoriesRequest, GetCategoriesResponse } from '../models/categories';
 import api from '../utill/api';
+import { SPOTIFY_BASE_URL } from '../config/commonConfig';
 
-export const getCategories = async (
+export const getCategories = async (token: string,
     params?: GetCategoriesRequest 
 ): Promise<GetCategoriesResponse> => {
     try {
-        const response = await api.get(`/browse/categories`, {
+        const response = await  axios.get(`${SPOTIFY_BASE_URL}/browse/categories`, {
             params: params,
+            headers:{
+            Authorization:`Bearer ${token}`
+            },
         });
 
         return response.data;
