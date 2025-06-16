@@ -47,8 +47,8 @@ const CategoriesPage = () => {
                   <ImgIcon src={category.icons[0].url} alt={category.name} />
                 )}
               </Grid>
-              <Grid size={5} sx={{ paddingBottom: "5%", alignSelf: 'flex-end', fontFamily: "NanumSquareNeoBold" }}>
-                <Typography variant="body1">{category.name}</Typography>
+              <Grid size={5} sx={{ paddingBottom: "5%", alignSelf: 'flex-end'}}>
+                <Typography fontWeight={"700"}  fontSize={"16px"}>{category.name}</Typography>
 
               </Grid>
             </StyledBox>
