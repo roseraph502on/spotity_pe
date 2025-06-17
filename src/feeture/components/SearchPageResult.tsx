@@ -50,7 +50,7 @@ const SearchPageResult = ({ tracks, albums, artists }: SearchPageResultProps) =>
         <Grid container>
           {
             artists.map((artist) => (
-              <Grid size={2}>
+              <Grid size={{ xs: 4, md: 2 }}>
                 <ArtistsCard
                   key={artist.id}
                   image={artist.images.length > 0 ? artist.images[0].url : ''}
@@ -67,7 +67,7 @@ const SearchPageResult = ({ tracks, albums, artists }: SearchPageResultProps) =>
         <Grid container>
           {
             albums.map((album) => (
-              <Grid size={{ xs: 3, md: 2 }}>
+              <Grid size={{ xs: 4, md: 2 }}>
                 <Card
                   key={album.id}
                   image={album.images && album.images.length > 0 ? album.images[0].url : ''}
