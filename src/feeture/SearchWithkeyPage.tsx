@@ -55,9 +55,9 @@ const SearchWithkeyPage = () => {
     const artists = data?.pages?.flatMap((page) => page.artists?.items).filter((item)
      : item is ArtistObjectSimplified => item !== undefined) ?? [];  const hasResults = tracks.length > 0;
 
-  console.log("search",data);
-  console.log("searchKeyword",searchKeyword);
-  console.log("inputValue",inputValue);
+  // console.log("search",data);
+  // console.log("searchKeyword",searchKeyword);
+  // console.log("inputValue",inputValue);
   if (isLoading ) return <Loading />;
   if (error) return <Error errorMessage={error.message} />;
   return (
