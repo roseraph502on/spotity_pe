@@ -1,5 +1,6 @@
+import { SimpleifiedAlbumObject } from "./album";
 import { ApiResponse } from "./apiResponse";
-import { Artist } from "./artist";
+import { Artist, ArtistObjectSimplified } from "./artist";
 import { SimplifiedPlaylist } from "./playlist";
 import { EpisodeShow, SimplifiedAudioBook, SimplifiedEpisode, Track } from "./Track";
 
@@ -21,8 +22,8 @@ export interface SearchRequestParams {
   include_external?:string;
 }
 export interface SearchResponse{
-  artists?:ApiResponse<Artist>;
-  albums?:ApiResponse<SimplifiedPlaylist>;
+  artists?:ApiResponse<ArtistObjectSimplified>;
+  albums?:ApiResponse<SimpleifiedAlbumObject>;
   tracks?:ApiResponse<Track>;
   playlist?: ApiResponse<SimplifiedPlaylist>;
   show?:ApiResponse<EpisodeShow>;

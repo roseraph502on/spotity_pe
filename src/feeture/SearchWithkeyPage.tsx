@@ -6,18 +6,22 @@ import useSearchItemsByKeyword from '../hooks/useSearchItemsByKeyword';
 import { SEARCH_TYPE } from '../models/serach';
 import { useParams } from 'react-router';
 import { Track } from '../models/Track';
-import { Artist } from '../models/artist';
-import { SimplifiedPlaylist } from '../models/playlist';
 import SearchPageResult from './components/SearchPageResult';
+import { SimpleifiedAlbumObject } from '../models/album';
+import { ArtistObjectSimplified } from '../models/artist';
+import Loading from '../core/inform/Loading';
+import Error from '../core/inform/Error';
+import useClientCredentialToken from '../hooks/useClientCredentialToken';
 
 const SearchWithkeyPage = () => {
   const { keyword: encodedKeyword } = useParams<{ keyword: string }>();
     const searchKeyword = encodedKeyword ? decodeURIComponent(encodedKeyword) : '';
   const [inputValue, setInputValue] = useState(searchKeyword);
+    const clientCredentialToken = useClientCredentialToken()
 
   useEffect(() => {
     setInputValue(searchKeyword);
-  }, [searchKeyword]); 
+  }, [searchKeyword,clientCredentialToken]); 
 
   const navigate = useNavigate();
 
@@ -47,11 +51,15 @@ const SearchWithkeyPage = () => {
    const tracks = data?.pages?.flatMap((page) => page.tracks?.items).filter((item)
      : item is Track => item !== undefined) ?? [];
     const albums = data?.pages?.flatMap((page) => page.albums?.items).filter((item)
-     : item is SimplifiedPlaylist => item !== undefined) ?? [];
+     : item is SimpleifiedAlbumObject => item !== undefined) ?? [];
     const artists = data?.pages?.flatMap((page) => page.artists?.items).filter((item)
-     : item is Artist => item !== undefined) ?? [];  const hasResults = tracks.length > 0;
+     : item is ArtistObjectSimplified => item !== undefined) ?? [];  const hasResults = tracks.length > 0;
 
   console.log("search",data);
+  console.log("searchKeyword",searchKeyword);
+  console.log("inputValue",inputValue);
+  if (isLoading ) return <Loading />;
+  if (error) return <Error errorMessage={error.message} />;
   return (
     <div>
         <TextField
