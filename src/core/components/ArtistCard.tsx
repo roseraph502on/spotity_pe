@@ -1,6 +1,7 @@
 import { styled, Typography } from "@mui/material";
 import React from "react";
 import PlayButton from "./PlayButton";
+
 const CardContainer = styled("div")(({ theme }) => ({
   minWidth: "160px",
   width: "100%",
@@ -21,10 +22,9 @@ const CardContainer = styled("div")(({ theme }) => ({
   },
 }));
 const AlbumImage = styled("img")({
-    maxWidth:'150px',
   width: "100%",
   height: "auto",
-  borderRadius: "8px",
+  borderRadius: "100px",
   marginBottom: "8px",
 });
 const EllipsisTypography = styled(Typography)({
@@ -44,11 +44,11 @@ const Overlay = styled("div")({
 
 interface CardProps {
   name: string | undefined;
-  artistName?: string | undefined;
+  type?: string | undefined;
   image: string | undefined;
 }
 
-const Card = ({ name, artistName, image }: CardProps) => {
+const ArtistsCard = ({ name, type, image }: CardProps) => {
   return (
     <CardContainer>
       <div style={{ position: "relative" }}>
@@ -60,12 +60,10 @@ const Card = ({ name, artistName, image }: CardProps) => {
 
       <EllipsisTypography variant="h2">{name || "No name"}</EllipsisTypography>
       <EllipsisTypography variant="body1" color="text.secondary">
-        {artistName || "No artist"}
+        {type || "No artist"}
       </EllipsisTypography>
     </CardContainer>
   );
 };
 
-export default Card;
-
-
+export default ArtistsCard;

@@ -48,7 +48,7 @@ const CategoriesPage = () => {
   if (startIndex === null || isLoading) return <Loading />
   if (isError) return <Error errorMessage={error.message} />
   const categories = data?.categories?.items;
-  console.log("useGetCategories", data)
+  // console.log("useGetCategories", data)
   return (
     <Grid container spacing={2} padding={"1%"}>
 
