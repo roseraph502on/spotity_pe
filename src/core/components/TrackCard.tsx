@@ -1,4 +1,4 @@
-import { styled, Grid, Typography } from '@mui/material';
+import { styled, Grid, Typography, Box } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import moment from 'moment';
 import React from 'react'
@@ -20,7 +20,7 @@ const CardContainer = styled(Grid)(({ theme }) => ({
   },
 }));
 const Image = styled("img")({
-  maxWidth:'40px',
+  maxWidth: '40px',
   width: "100%",
   height: "auto",
   borderRadius: "8px",
@@ -37,24 +37,26 @@ const Overlay = styled('div')({
   transform: "translate3d(0px, 0px, 0px)",
   transition: "opacity 0.3s ease-in-out",
   top: 0,
-  right:'10px',
+  right: '10px',
 });
 interface CardProps {
   name: string | undefined;
   artistName?: string | undefined;
   image: string | undefined;
-  duration_ms?:number | undefined;
+  duration_ms?: number | undefined;
 }
-const TrackCard = ({ name, artistName, image, duration_ms  }: CardProps) => {
+const TrackCard = ({ name, artistName, image, duration_ms }: CardProps) => {
   return (
     <CardContainer size={12} container>
       <Grid size={2}><Image src={image} /></Grid>
-      <Grid size={8} container  style={{ position: "relative" }}>
+      <Grid size={8} container style={{ position: "relative" }}>
+        <Box sx={{ width: '85%' }}>
           <EllipsisTypography variant="h2">{name || "No name"}</EllipsisTypography>
           <EllipsisTypography variant="body1" color="text.secondary">
             {artistName || "No artist"}
           </EllipsisTypography>
-          <Overlay className="overlay">
+        </Box>
+        <Overlay className="overlay">
           <AddCircleOutlineIcon />
         </Overlay>
       </Grid>
