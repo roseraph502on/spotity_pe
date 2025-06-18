@@ -40,6 +40,7 @@ const SearchPageResult = ({ tracks, albums, artists }: SearchPageResultProps) =>
                 name={track.name || 'Unknown Album'}
                 artistName={track.artists && track.artists.length > 0 ? track.artists[0].name : "Unknown Artist"}
                 duration_ms={track.duration_ms}
+                uri={track.uri}
               />
             ))
           }
@@ -50,13 +51,13 @@ const SearchPageResult = ({ tracks, albums, artists }: SearchPageResultProps) =>
         <Grid container>
           {
             artists.map((artist) => (
-              <Grid size={2}>
-                <ArtistsCard
+              <Grid size={{ xs: 6, sm: 4, md: 2 }}>
+                  <ArtistsCard
                   key={artist.id}
                   image={artist.images.length > 0 ? artist.images[0].url : ''}
                   name={artist.name || 'Unknown Album'}
                   type={artist.type || "Unknown type"}
-                />
+                />                
               </Grid>
             ))
           }
@@ -67,7 +68,7 @@ const SearchPageResult = ({ tracks, albums, artists }: SearchPageResultProps) =>
         <Grid container>
           {
             albums.map((album) => (
-              <Grid size={{ xs: 3, md: 2 }}>
+              <Grid size={{ xs: 6, sm: 4, md: 2 }}>
                 <Card
                   key={album.id}
                   image={album.images && album.images.length > 0 ? album.images[0].url : ''}

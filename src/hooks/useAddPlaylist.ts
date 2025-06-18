@@ -29,8 +29,11 @@ const useAddPlaylist = () => {
                  queryKey: ['playlist', { playlist_id: variables.playlist_id }],
              });
 
-            if (variables.trackName) {
-                 alert(`'${variables.trackName}' 플레이리스트에 추가하셨습니다.`);
+            if (variables.trackName && variables.albumName) {
+                 alert(`'${variables.trackName}'을(를) ${variables.albumName}에 추가하셨습니다.`);
+            }
+            else if(variables.trackName) {
+                 alert(`'${variables.trackName}'을(를) 플레이리스트에 추가하셨습니다.`);
             } else { alert(`항목을 플레이리스트에 추가하셨습니다.`); }
               window.location.reload();
 

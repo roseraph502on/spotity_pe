@@ -23,7 +23,7 @@ const CardContainer = styled("div")(({ theme }) => ({
 const AlbumImage = styled("img")({
     maxWidth:'150px',
   width: "100%",
-  height: "auto",
+  aspectRatio: '1 / 1',
   borderRadius: "8px",
   marginBottom: "8px",
 });
