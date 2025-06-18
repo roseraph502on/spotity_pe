@@ -5,9 +5,9 @@ import Loading from '../../core/inform/Loading';
 import Error from '../../core/inform/Error';
 import styled from 'styled-components';
 const predefinedColors: string[] = [
-  '#561ED7', '#D7431E', '#D71E68',
-  '#D7C41E', '#901ED7', '#1E40D7',
-  '#1ED760',
+  '#1ED790',
+  '#1E62D7',
+  '#D71E87',
 ];
 const RecordPlayerArm = styled('img')({
   position: 'absolute',
@@ -20,7 +20,13 @@ const RecordPlayerArm = styled('img')({
 const ImgIcon = styled('img')({
   width: "80%",
   borderRadius: "300px",
-  boxShadow:"2px 2px 2px rgba(0, 0, 0, 0.39)"
+  border:"3.7vw solid #111",
+  boxShadow:"2px 2px 2px rgba(0, 0, 0, 0.39)",
+  backgroundSize: "cover",
+  backgroundPosition: "no-repeat",
+  '@media (max-width: 900px)': {
+      border:"5vw solid #111",
+  },
 })
 const StyledBox = styled(Grid)(({ theme }) => ({
   width: "100%",
