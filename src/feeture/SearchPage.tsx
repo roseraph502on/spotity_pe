@@ -10,31 +10,36 @@ import { useParams } from 'react-router';
 
 const SearchPage = () => {
   const navigate = useNavigate();
-  const [keyword,setKeyword] = useState<string>("");
-  
-  const handleSearchKeyword = (event:React.ChangeEvent<HTMLInputElement>)=>{
+  const [keyword, setKeyword] = useState<string>("");
+
+  const handleSearchKeyword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(event.target.value)
     navigate(`/search/${encodeURIComponent(keyword)}`)
   }
   return (
     <div>
-       <TextField
-              value={keyword}
-              onChange={handleSearchKeyword}
-              placeholder="Search song"
-              variant="outlined"
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon style={{ color: "white" }} />
-                    </InputAdornment>
-                  ),
-                },
-              }}
-              sx={{width:"100%",marginTop:"10px"}}
-            />
-              <CategoriesPage />            
+      <TextField
+        value={keyword}
+        onChange={handleSearchKeyword}
+        placeholder="Search song"
+        variant="outlined"
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon style={{ color: "white" }} />
+              </InputAdornment>
+            ),
+          },
+        }}
+        sx={{
+          width: "100%", marginTop: "10px",
+          bgcolor: 'rgba(169, 169, 169, 0.23)',
+          borderRadius: '24px',
+          border: 'none',
+          '&> div': { borderRadius: '24px', border: 'none' }
+        }} />
+      <CategoriesPage />
     </div>
   )
 }

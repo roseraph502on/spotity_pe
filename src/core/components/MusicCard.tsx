@@ -17,7 +17,7 @@ const CardContainer = styled("div")(({ theme }) => ({
   },
   '@media (max-width: 396px)': {
     padding: "6px",
-    minWidth: "120px",
+    maxWidth: "140px",
   },
 }));
 const AlbumImage = styled("img")({

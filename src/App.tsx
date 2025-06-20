@@ -3,6 +3,7 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom'
 import Loading from './core/inform/Loading';
 import useExchangeToken from './hooks/useExchangeToken';
+import Library from './core/applayout/components/Library';
 const AppLayout = React.lazy(() => import('./core/applayout/AppLayout'))
 const Homepage = React.lazy(() => import('./feeture/Homepage'))
 const SearchPage = React.lazy(() => import('./feeture/SearchPage'))
@@ -31,6 +32,7 @@ function App() {
           <Route path='search/:keyword' element={<SearchWithkeyPage />} />
           <Route path='playlist/:id' element={<PlaylistDetailPage />} />
           <Route path='playlist' element={<PlaylistPage />} />
+          <Route path='library' element={<Library />} />
         </Route>
         <Route path='/load' element={<Loading />} />
 
