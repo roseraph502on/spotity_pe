@@ -74,11 +74,12 @@ const Library = () => {
       </Head>
       <Box sx={{
         height: "100%",
+        flexGrow: 1,
         overflowY: 'auto',
         '&::-webkit-scrollbar': {
           display: 'none',
         },
-        backgroundColor: '#111'
+        backgroundColor:'#111'
       }} >
         {!playlist || playlist?.pages[0].total === 0 ?
           <EmptyPlaylist />
