@@ -19,7 +19,7 @@ const Head = styled('ul')(({ theme }) => ({
   padding: theme.spacing(1),
 }));
 const HeadBTN = styled(Button)(({ theme }) => ({
-  minWidth:'25px',
+  minWidth: '25px',
   padding: '2px'
 }));
 const LibraryText = styled('h3')(({ theme }) => ({
@@ -30,21 +30,21 @@ const LibraryText = styled('h3')(({ theme }) => ({
 
 const Library = () => {
   //유저 정보
-  const { data:user, isLoading: isUserLoading, error: userError } = useGetCrruentUserProfile();
+  const { data: user, isLoading: isUserLoading, error: userError } = useGetCrruentUserProfile();
   //플레이 리스트
   const { ref, inView } = useInView();
-  const { data: playlist, error, isLoading, hasNextPage, isFetchingNextPage ,fetchNextPage } = useGetCurrentUserPlaylists(
+  const { data: playlist, error, isLoading, hasNextPage, isFetchingNextPage, fetchNextPage } = useGetCurrentUserPlaylists(
     { limit: 7, offset: 0 })
-    useEffect(()=>{
-    if(inView && hasNextPage && !isFetchingNextPage){
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  },[inView])
-  const {mutate:createList}= useCreatePlaylist()
+  }, [inView])
+  const { mutate: createList } = useCreatePlaylist()
   // console.log("playlist", playlist)
   // 유저 정보 로딩 중 또는 에러 발생 시 처리
-  if(isUserLoading) return <>loading ...</>;
-  if(userError) return <Error errorMessage={userError.message} />;
+  if (isUserLoading) return <>loading ...</>;
+  if (userError) return <Error errorMessage={userError.message} />;
   // 유저 정보는 로드되었지만 데이터가 없는 경우 (예: 로그인 안 함) 처리
   if (!user) return <EmptyPlaylist />;
 
@@ -52,44 +52,45 @@ const Library = () => {
   if (isLoading) return <Loading />;
   if (error) return <Error errorMessage={error.message} />;
 
-  const createListClk = ()=>{
-    createList({name:"my playist"})
+  const createListClk = () => {
+    createList({ name: "my playist" })
   }
   return (
     <Box
-    sx={{
-        display: 'flex', 
-        flexDirection: 'column', 
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
         height: '100%',
       }}
     >
       <Head>
         <HeadBTN>
-        <BookmarkIcon />
-        </HeadBTN>       
+          <BookmarkIcon />
+        </HeadBTN>
         <LibraryText>Your Library</LibraryText>
         <HeadBTN onClick={createListClk}>
-                  <AddIcon />
+          <AddIcon />
         </HeadBTN>
       </Head>
       <Box sx={{
-        height:"100px",
-          flexGrow: 1,
-          overflowY: 'auto',
-          '&::-webkit-scrollbar': {
-             display: 'none',
-           },}} >
+        height: "100%",
+        overflowY: 'auto',
+        '&::-webkit-scrollbar': {
+          display: 'none',
+        },
+        backgroundColor: '#111'
+      }} >
         {!playlist || playlist?.pages[0].total === 0 ?
           <EmptyPlaylist />
-        :(
-          <div>
-            {playlist?.pages.map((page,index)=>(
-              <Playlist playlists={page.items} key={index}/>
-            ))}
-            <div ref={ref}>--end--</div>
-          </div>
-        ) 
-        
+          : (
+            <div>
+              {playlist?.pages.map((page, index) => (
+                <Playlist playlists={page.items} key={index} />
+              ))}
+              <div ref={ref}></div>
+            </div>
+          )
+
         }
       </Box>
     </Box>

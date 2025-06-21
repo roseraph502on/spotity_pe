@@ -27,7 +27,7 @@ const DesktopPlayListItem = ({item, index}:DesktopPlayListItemProps) => {
            <StyledTableRow>
             <TableCell >{index}</TableCell>
             <TableCell >{item.track?.name || 'no name'}</TableCell>
-            <TableCell >{isEpisode(item.track) ? "N/A" : item.track?.album?.name }</TableCell>
+            <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{isEpisode(item.track) ? "N/A" : item.track?.album?.name }</TableCell>
             <TableCell >{item.added_at ? moment(item.added_at).format("YYYY-MM-DD") : "Uknown"}</TableCell>
             <TableCell >{item.track?.duration_ms ? moment(item.track.duration_ms).format("mm:ss") : "Uknown"}</TableCell>
           </StyledTableRow>

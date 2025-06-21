@@ -82,7 +82,7 @@ const PlaylistDetailPage = () => {
           <TableRow>
             <TableCell >#</TableCell>
             <TableCell >Title</TableCell>
-            <TableCell >Album</TableCell>
+            <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Album</TableCell>
             <TableCell >Date added</TableCell>
             <TableCell >Duration</TableCell>
           </TableRow>
