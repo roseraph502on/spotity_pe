@@ -54,7 +54,7 @@ const AppLayout = () => {
       </Sidebar>
       {/* 3  : Sidebar 옆의 메인 콘텐츠 영역 */}
       <Box  sx={{display: 'flex', flexGrow: 1,flexDirection: 'column'}}>
-        <ContentBox  height={{xs:'90vh', sm:'100vh'}}
+        <ContentBox  height={{xs:'90vh', sm:'98vh'}}
         sx={{ padding:"0 20px", display: 'flex',flexDirection: 'column',}}>
           <NavBar/>
           <Box sx={{overflowY: 'auto','&::-webkit-scrollbar': { display: 'none' } , marginTop:'10px'}}>

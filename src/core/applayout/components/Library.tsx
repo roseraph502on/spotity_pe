@@ -73,7 +73,7 @@ const Library = () => {
         </HeadBTN>
       </Head>
       <Box sx={{
-        height: "100%",
+        height:{xs:'100%',md:'300px'},
         flexGrow: 1,
         overflowY: 'auto',
         '&::-webkit-scrollbar': {
